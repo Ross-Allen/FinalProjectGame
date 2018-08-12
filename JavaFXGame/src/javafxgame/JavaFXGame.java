@@ -5,6 +5,7 @@
  */
 package javafxgame;
 
+import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,6 +25,13 @@ public class JavaFXGame extends Application {
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        URL url = this.getClass().getResource("mainmenu.css");
+        if(url == null){
+            System.out.println("mainmenu.css not found");
+            System.exit(-1);
+        }
+        String css = url.toExternalForm();
+        scene.getStylesheets().add(css);
         stage.show();
     }
 
