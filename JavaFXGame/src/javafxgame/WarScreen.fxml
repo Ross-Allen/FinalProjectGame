@@ -21,6 +21,6 @@
             <Font name="Lucida Bright Demibold" size="22.0" />
          </font>
       </Button>
-      <ImageView id="deckImageView" fitHeight="103.0" fitWidth="80.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView id="deckImageView" fx:id="warDeck" fitHeight="103.0" fitWidth="80.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

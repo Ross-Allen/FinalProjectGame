@@ -6,7 +6,7 @@ import java.util.Collections;
  * GroupOfCards abstract SuperClass
  * @author ross
  */
-    public abstract class GroupOfCards {
+public abstract class GroupOfCards {
     
      /** Class Attributes */
     protected ArrayList<Card> group;
@@ -22,7 +22,12 @@ import java.util.Collections;
      * order method
      */
     public void order(){
-        Collections.sort(this.group, (a,b)->b.compareTo(a));
+        try{
+            Collections.sort(this.group, (a,b)->b.compareTo(a));
+        }catch(Exception e){
+            System.out.println("Error occured in GroupOfCards.java->order()");
+        }  
+        
     }
     
     /**
@@ -30,7 +35,12 @@ import java.util.Collections;
      * @return 
      */
     public Card dealCard(){
-        return this.group.remove(0);
+        try{
+            return this.group.remove(0);
+        }catch(Exception e){
+            System.out.println("Error occured in GroupOfCards.java->dealCard()");
+            return null;
+        }  
     }
      
     /**

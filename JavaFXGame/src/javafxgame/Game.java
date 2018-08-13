@@ -1,3 +1,5 @@
+package javafxgame;
+
 /**
  * Game Interface
  * @author ross

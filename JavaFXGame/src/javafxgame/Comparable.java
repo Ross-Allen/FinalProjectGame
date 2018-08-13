@@ -1,3 +1,4 @@
+package javafxgame;
 /**
  * Comparable interface for Card Objects
  * @author ross

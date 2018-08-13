@@ -1,3 +1,5 @@
+package javafxgame;
+
 /**
  * Card Class
  * @author ross
