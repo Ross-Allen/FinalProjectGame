@@ -22,14 +22,52 @@ import javax.annotation.Resources;
  */
 public class WarScreenController implements Initializable {
 
+    //card pile declarations
     @FXML
-    ImageView warDeck;   
+    ImageView warDeck; 
+    @FXML
+    ImageView plr1Hand;
+    @FXML
+    ImageView plr2Hand;
+    @FXML
+    ImageView plr1Compare;
+    @FXML 
+    ImageView plr2Compare;
+    @FXML
+    ImageView plr1WinHand;
+    @FXML 
+    ImageView plr2WinHand;
+    @FXML
+    ImageView plr1WarCard1;
+    @FXML
+    ImageView plr1WarCard2;
+    @FXML
+    ImageView plr1WarCard3;
+    @FXML
+    ImageView plr2WarCard1;
+    @FXML
+    ImageView plr2WarCard2;
+    @FXML
+    ImageView plr2WarCard3;
+    @FXML
+    ImageView plr1WarCompare;
+    @FXML
+    ImageView plr2WarCompare;
     
     @FXML
-    private void handleButtonAction(ActionEvent event){
+    private void handleDrawCompareAction(ActionEvent event){
         
     }
     
+    @FXML
+    private void handleQuitAction(ActionEvent event){
+    
+    }
+    
+    @FXML
+    private void handleInstructionsAction(ActionEvent event){
+        
+    }
     
     
    
@@ -41,6 +79,7 @@ public class WarScreenController implements Initializable {
         // TODO
         Image image = new Image("javafxgame/images/back.png");
         warDeck.setImage(image);
+        warDeck.setVisible(false);
         
     }    
     
