@@ -11,16 +11,16 @@
         <URL value="@warscreen.css" />
     </stylesheets>
    <children>
-      <Button id="btnQuit" layoutX="606.0" layoutY="392.0" mnemonicParsing="false" onAction="#goToWarScreen" stylesheets="@mainmenu.css" text="Quit">
+      <Button id="btnQuit" fx:id="quitButtonTest" layoutX="606.0" layoutY="392.0" mnemonicParsing="false" onAction="#handleButtonAction" stylesheets="@mainmenu.css" text="Quit">
          <font>
             <Font name="Lucida Bright Demibold" size="22.0" />
          </font>
       </Button>
-      <Button id="btnQuit" layoutX="520.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToWarScreen" stylesheets="@mainmenu.css" text="Instructions">
+      <Button id="btnQuit" layoutX="520.0" layoutY="14.0" mnemonicParsing="false" stylesheets="@mainmenu.css" text="Instructions">
          <font>
             <Font name="Lucida Bright Demibold" size="22.0" />
          </font>
       </Button>
-      <ImageView id="deckImageView" fx:id="warDeck" fitHeight="103.0" fitWidth="80.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="warDeck" fitHeight="110.0" fitWidth="121.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
