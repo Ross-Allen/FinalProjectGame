@@ -25,6 +25,7 @@ public class WarScreenController implements Initializable {
     
     
     
+    
     /**
      * Initializes the controller class.
      */
