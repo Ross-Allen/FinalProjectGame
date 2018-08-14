@@ -6,27 +6,14 @@ import java.util.ArrayList;
  * @author ross
  */
 public class Hand extends GroupOfCards{
-    
-    /**
-     * Hand collection of cards 
-     */
-    private ArrayList<Card> hand;
-    
+
    /**
     * Hand Constructor
     */
     public Hand(){
-        hand = new ArrayList<>();
+        group = new ArrayList<>();
     }
-    
-    /**
-     * Get hand method 
-     * @return ArrayList collection of cards
-     */
-    public ArrayList<Card> getHand(){
-        return this.hand;
-    }
-    
+
     /**
      * Override toString method
      * @return 
@@ -34,7 +21,7 @@ public class Hand extends GroupOfCards{
     @Override
     public String toString(){
         String fullString = "";
-        for(Card element: this.hand){
+        for(Card element: this.group){
             fullString += element.number + " of " + element.suit + ", ";
         }
         return fullString;

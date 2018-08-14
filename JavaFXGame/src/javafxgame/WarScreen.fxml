@@ -113,7 +113,7 @@
             <Font name="Lucida Grande Bold" size="17.0" />
          </font>
       </Text>
-      <Button id="btnQuit" fx:id="btnPlay" layoutX="234.0" layoutY="102.0" mnemonicParsing="false" onAction="#handlePlayAction" stylesheets="@mainmenu.css" text="Shuffle and Play!">
+      <Button fx:id="btnPlay" layoutX="234.0" layoutY="102.0" mnemonicParsing="false" onAction="#handlePlayAction" stylesheets="@mainmenu.css" text="Shuffle and Play!">
          <font>
             <Font name="Lucida Bright Demibold" size="22.0" />
          </font>

@@ -27,7 +27,6 @@ public abstract class GroupOfCards {
         }catch(Exception e){
             System.out.println("Error occured in GroupOfCards.java->order()");
         }  
-        
     }
     
     /**

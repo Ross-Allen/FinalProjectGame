@@ -14,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import javax.annotation.Resources;
 
 /**
  * FXML Controller class
@@ -23,8 +22,14 @@ import javax.annotation.Resources;
  */
 public class WarScreenController implements Initializable {
     
-    GameOfWar gow;
-    
+    private GroupOfCards zdeck;
+    private GroupOfCards zplr1Comparable;
+    private GroupOfCards zplr2Comparable;
+    private GroupOfCards zplr1WinHand;
+    private GroupOfCards zplr2WinHand;
+    private GroupOfCards zplr1Hand;
+    private GroupOfCards zplr2Hand;
+
     //card pile declarations
     @FXML
     Text youText;
@@ -69,18 +74,34 @@ public class WarScreenController implements Initializable {
     
     @FXML
     private void handlePlayAction(ActionEvent event){
-        //set play button and deck visibility to false
+        //set play button, draw button, and deck visibility.
         btnPlay.setVisible(false);
         warDeck.setVisible(false);
+        btnDrawCompare.setVisible(true);
         
-        
-        
-        
-    }
+        //create deck and shuffle
+        zdeck.shuffle();
+        //split deck
+//        for(int i = 0; i < zdeck.group.size(); i++){
+//            if(i % 2 == 0){
+//                zplr1Hand.group.add(zdeck.group.remove(0));
+//            }else{
+//                zplr2Hand.group.add(zdeck.group.remove(0));
+//            }
+//        }
+        //show placeholder
+        plr1Hand.setVisible(true);
+        plr2Hand.setVisible(true); 
+    }//end play handler
     
     @FXML
     private void handleDrawCompareAction(ActionEvent event){
-        
+//        Card plr1Card = zplr1Hand.dealCard();
+//        Card plr2Card = zplr2Hand.dealCard();
+//        Image plr1Image = new Image("javafxgame/images/" + (plr1Card.number.getValue() + plr1Card.suit.getSuit()) + ".png");
+//        Image plr2Image = new Image("javafxgame/images/" + (plr2Card.number.getValue() + plr2Card.suit.getSuit()) +".png");
+//        plr1Hand.setImage(plr1Image);
+//        plr1Hand.setImage(plr2Image);
     }
     
     @FXML
@@ -102,6 +123,14 @@ public class WarScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        zdeck = new Deck();
+        zplr1Comparable = new Hand();
+        zplr2Comparable = new Hand();
+        zplr1WinHand = new Hand();
+        zplr2WinHand = new Hand();
+        zplr1Hand = new Hand();
+        zplr2Hand = new Hand();
         
         Image image = new Image("javafxgame/images/back.png");
         warDeck.setImage(image);
