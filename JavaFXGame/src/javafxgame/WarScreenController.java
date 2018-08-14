@@ -82,27 +82,66 @@ public class WarScreenController implements Initializable {
         //create deck and shuffle
         zdeck.shuffle();
         //split deck
-//        for(int i = 0; i < zdeck.group.size(); i++){
-//            if(i % 2 == 0){
-//                zplr1Hand.group.add(zdeck.group.remove(0));
-//            }else{
-//                zplr2Hand.group.add(zdeck.group.remove(0));
-//            }
-//        }
+        for(int i = 0; i < zdeck.group.size(); i++){
+            if(i % 2 == 0){
+                zplr1Hand.group.add(zdeck.group.remove(0));
+            }else{
+                zplr2Hand.group.add(zdeck.group.remove(0));
+            }
+        }
         //show placeholder
         plr1Hand.setVisible(true);
         plr2Hand.setVisible(true); 
     }//end play handler
     
     @FXML
-    private void handleDrawCompareAction(ActionEvent event){
-//        Card plr1Card = zplr1Hand.dealCard();
-//        Card plr2Card = zplr2Hand.dealCard();
-//        Image plr1Image = new Image("javafxgame/images/" + (plr1Card.number.getValue() + plr1Card.suit.getSuit()) + ".png");
-//        Image plr2Image = new Image("javafxgame/images/" + (plr2Card.number.getValue() + plr2Card.suit.getSuit()) +".png");
-//        plr1Hand.setImage(plr1Image);
-//        plr1Hand.setImage(plr2Image);
-    }
+    private void handleDrawCompareAction(ActionEvent event) throws InterruptedException{
+        //show drawn cards to be prepared.
+        Card plr1Card = zplr1Hand.dealCard();
+        Card plr2Card = zplr2Hand.dealCard();
+        Image plr1Image = new Image("javafxgame/images/" + (plr1Card.number.getValue() + plr1Card.suit.getSuit()) + ".png");
+        Image plr2Image = new Image("javafxgame/images/" + (plr2Card.number.getValue() + plr2Card.suit.getSuit()) +".png");
+        plr1Compare.setImage(plr1Image);
+        plr2Compare.setImage(plr2Image);
+        plr1Compare.setVisible(true);
+        plr2Compare.setVisible(true);
+        
+        //sleep 3 seconds
+        Thread.sleep(3000);
+        //TODO: !!!!!!!!!!!!!!!!!!!!!!!!
+        //perform comparison
+        result = (plr1Comparable.group.get(plr1Comparable.group.size()-1))
+                .compareRank(plr2Comparable.group.get(plr2Comparable.group.size()-1));
+        //size for loops
+        int comparisonSize = plr1Comparable.group.size();
+        switch(result){
+            case 1:      //player 1 wins war
+                for(int i = 0; i < comparisonSize; i++){
+                    plr1WinHand.group.add(plr1Comparable.group.remove(0));
+                    plr1WinHand.group.add(plr2Comparable.group.remove(0));
+                }
+                System.out.println("Player 1 won the war");
+                roundsPlayed++;
+                break;
+            case -1:      //player 2 wins war
+                for(int i = 0; i < comparisonSize; i++){
+                    plr2WinHand.group.add(plr1Comparable.group.remove(0));
+                    plr2WinHand.group.add(plr2Comparable.group.remove(0));
+                }
+                System.out.println("Player 2 won the war");
+                roundsPlayed++;
+                break;
+            case 0: //tie (war again)
+                war();
+                break;
+            default:
+                System.out.println("Error: result is not 1, -1, or 0");
+                break;
+            }//end switch
+        
+        
+        
+    }//end draw and compare method
     
     @FXML
     private void handleQuitAction(ActionEvent event){
