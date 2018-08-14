@@ -118,5 +118,10 @@
             <Font name="Lucida Bright Demibold" size="22.0" />
          </font>
       </Button>
+      <Text fx:id="winText" layoutX="245.0" layoutY="439.0" opacity="0.46" strokeType="OUTSIDE" strokeWidth="0.0" text="YOU WIN!">
+         <font>
+            <Font name="Lucida Grande Bold" size="27.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
