@@ -13,7 +13,7 @@
         <URL value="@warscreen.css" />
     </stylesheets>
    <children>
-      <Button id="btnQuit" fx:id="btnQuit" layoutX="606.0" layoutY="454.0" mnemonicParsing="false" onAction="#handleQuitAction" stylesheets="@mainmenu.css" text="Quit">
+      <Button id="btnQuit" fx:id="btnBack" layoutX="606.0" layoutY="454.0" mnemonicParsing="false" onAction="#handleBackAction" stylesheets="@mainmenu.css" text="Back">
          <font>
             <Font name="Lucida Bright Demibold" size="22.0" />
          </font>

@@ -32,7 +32,7 @@ public class WarScreenController implements Initializable {
     @FXML
     Text youText;
     @FXML
-    Button btnQuit;
+    Button btnBack;
     @FXML
     Button btnInstructions;
     @FXML
@@ -214,7 +214,7 @@ public class WarScreenController implements Initializable {
     }//end draw and compare method
     
     @FXML
-    private void handleQuitAction(ActionEvent event){
+    private void handleBackAction(ActionEvent event){
     
     }
     
@@ -292,6 +292,8 @@ public class WarScreenController implements Initializable {
                             zplr1WinHand.group.add(zplr1Comparable.group.remove(0));
                             zplr1WinHand.group.add(zplr2Comparable.group.remove(0));
                         }
+                        winText.setText("You win the War");
+                        winText.setVisible(true);
                         System.out.println("Player 1 won the war");
                         break;
                     case -1:      //player 2 wins war
@@ -299,6 +301,8 @@ public class WarScreenController implements Initializable {
                             zplr2WinHand.group.add(zplr1Comparable.group.remove(0));
                             zplr2WinHand.group.add(zplr2Comparable.group.remove(0));
                         }
+                        winText.setText("You lose the War");
+                        winText.setVisible(true);
                         System.out.println("Player 2 won the war");
                         break;
                     case 0: //tie (war again)
