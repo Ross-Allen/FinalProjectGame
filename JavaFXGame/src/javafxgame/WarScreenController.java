@@ -29,6 +29,7 @@ public class WarScreenController implements Initializable {
     private GroupOfCards zplr2WinHand;
     private GroupOfCards zplr1Hand;
     private GroupOfCards zplr2Hand;
+    private int roundsPlayed;
 
     //card pile declarations
     @FXML
@@ -96,51 +97,58 @@ public class WarScreenController implements Initializable {
     
     @FXML
     private void handleDrawCompareAction(ActionEvent event) throws InterruptedException{
-        //show drawn cards to be prepared.
-        Card plr1Card = zplr1Hand.dealCard();
-        Card plr2Card = zplr2Hand.dealCard();
-        Image plr1Image = new Image("javafxgame/images/" + (plr1Card.number.getValue() + plr1Card.suit.getSuit()) + ".png");
-        Image plr2Image = new Image("javafxgame/images/" + (plr2Card.number.getValue() + plr2Card.suit.getSuit()) +".png");
-        plr1Compare.setImage(plr1Image);
-        plr2Compare.setImage(plr2Image);
-        plr1Compare.setVisible(true);
-        plr2Compare.setVisible(true);
-        
-        //sleep 3 seconds
-        Thread.sleep(3000);
-        //TODO: !!!!!!!!!!!!!!!!!!!!!!!!
-        //perform comparison
-        result = (plr1Comparable.group.get(plr1Comparable.group.size()-1))
-                .compareRank(plr2Comparable.group.get(plr2Comparable.group.size()-1));
-        //size for loops
-        int comparisonSize = plr1Comparable.group.size();
-        switch(result){
-            case 1:      //player 1 wins war
-                for(int i = 0; i < comparisonSize; i++){
-                    plr1WinHand.group.add(plr1Comparable.group.remove(0));
-                    plr1WinHand.group.add(plr2Comparable.group.remove(0));
-                }
-                System.out.println("Player 1 won the war");
-                roundsPlayed++;
-                break;
-            case -1:      //player 2 wins war
-                for(int i = 0; i < comparisonSize; i++){
-                    plr2WinHand.group.add(plr1Comparable.group.remove(0));
-                    plr2WinHand.group.add(plr2Comparable.group.remove(0));
-                }
-                System.out.println("Player 2 won the war");
-                roundsPlayed++;
-                break;
-            case 0: //tie (war again)
-                war();
-                break;
-            default:
-                System.out.println("Error: result is not 1, -1, or 0");
-                break;
+        //validate that players hand have sufficient for dealing
+        if(zplr1Hand.group.size() > 0 && zplr2Hand.group.size() > 0){
+            //show drawn cards to be prepared.
+            zplr1Comparable.group.add(zplr1Hand.dealCard());
+            zplr2Comparable.group.add(zplr2Hand.dealCard());
+
+
+            Image plr1Image = new Image("javafxgame/images/" + (zplr1Comparable.group.get(0).number.getValue() + zplr1Comparable.group.get(0).suit.getSuit()) + ".png");
+            Image plr2Image = new Image("javafxgame/images/" + (zplr2Comparable.group.get(0).number.getValue() + zplr2Comparable.group.get(0).suit.getSuit()) + ".png");
+            plr1Compare.setImage(plr1Image);
+            plr2Compare.setImage(plr2Image);
+            plr1Compare.setVisible(true);
+            plr2Compare.setVisible(true);
+
+            //sleep 3 seconds
+            //Thread.sleep(3000);
+
+            //perform comparison
+            int result = (zplr1Comparable.group.get(0)).compareRank(zplr2Comparable.group.get(0));
+            //set size for loops
+            int size = zplr1Comparable.group.size();
+
+            //determine round winner and transfer cards to winner hand
+            switch(result){
+                case 1:     //player 1 wins
+                    for(int i = 0; i < size; i++){
+                        zplr1WinHand.group.add(zplr1Comparable.group.remove(0));
+                        zplr1WinHand.group.add(zplr2Comparable.group.remove(0));
+                    }
+                    System.out.println("Player 1 won the round");
+                    roundsPlayed++;
+                    break;
+                case -1:     //player 2 wins
+                    for(int i = 0; i < size; i++){
+                        zplr2WinHand.group.add(zplr1Comparable.group.remove(0));
+                        zplr2WinHand.group.add(zplr2Comparable.group.remove(0));
+                    }
+                    System.out.println("Player 2 won the round");
+                    roundsPlayed++;
+                    break;
+                case 0:      //tie (war)
+                    war();
+                    break;
+                default:
+                    System.out.println("Error: two cards did not compare properly");
+                    break;
             }//end switch
-        
-        
-        
+            pileToHand();
+        }else{
+            pileToHand();
+        }
+      
     }//end draw and compare method
     
     @FXML
@@ -153,8 +161,76 @@ public class WarScreenController implements Initializable {
         
     }
     
+    private void pileToHand(){
+        if(zplr1Hand.group.size() < 1){
+            for(int i = 0; i < zplr1WinHand.group.size(); i++){
+                zplr1Hand.group.add(zplr1WinHand.group.remove(0));
+            }
+        }
+        if(zplr2Hand.group.size() < 1){
+            for(int i = 0; i < zplr2WinHand.group.size(); i++){
+                zplr2Hand.group.add(zplr2WinHand.group.remove(0));
+            }
+        }
+    }
     
-    
+    /**
+     * War method
+     */
+    public void war(){
+        //local war method attributes
+        int result;
+        int count = 0;
+        
+        //Play only when number of rounds is not met and hands are still full and playable
+        if((zplr1Hand.group.size() > 0 && zplr1WinHand.group.size() > 0) ||
+           (zplr2Hand.group.size() > 0 && zplr2WinHand.group.size() > 0)){
+            //deal four cards and compare final set
+            while(count < 4){
+                //look to see if pile needs to be made hand
+                if(zplr1Hand.group.size() > 0 && zplr2Hand.group.size() > 0){
+                    zplr1Comparable.group.add(zplr1Hand.dealCard());
+                    zplr2Comparable.group.add(zplr2Hand.dealCard());
+                    count++;
+                }else{
+                    pileToHand();
+                }
+            }
+            //Display war hands
+            System.out.println("Player 1 comparison: " + zplr1Comparable.toString());
+            System.out.println("Player 2 comparison: " + zplr2Comparable.toString());
+            
+            //perform comparison
+            result = (zplr1Comparable.group.get(zplr1Comparable.group.size()-1))
+                    .compareRank(zplr2Comparable.group.get(zplr2Comparable.group.size()-1));
+            //size for loops
+            int comparisonSize = zplr1Comparable.group.size();
+            switch(result){
+                case 1:      //player 1 wins war
+                    for(int i = 0; i < comparisonSize; i++){
+                        zplr1WinHand.group.add(zplr1Comparable.group.remove(0));
+                        zplr1WinHand.group.add(zplr2Comparable.group.remove(0));
+                    }
+                    System.out.println("Player 1 won the war");
+                    roundsPlayed++;
+                    break;
+                case -1:      //player 2 wins war
+                    for(int i = 0; i < comparisonSize; i++){
+                        zplr2WinHand.group.add(zplr1Comparable.group.remove(0));
+                        zplr2WinHand.group.add(zplr2Comparable.group.remove(0));
+                    }
+                    System.out.println("Player 2 won the war");
+                    roundsPlayed++;
+                    break;
+                case 0: //tie (war again)
+                    war();
+                    break;
+                default:
+                    System.out.println("Error: result is not 1, -1, or 0");
+                    break;
+            }//end switch
+        }
+    }//end war method
     
    
     /**
