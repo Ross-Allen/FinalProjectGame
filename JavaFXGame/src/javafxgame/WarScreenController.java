@@ -11,7 +11,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -236,8 +239,12 @@ public class WarScreenController implements Initializable {
     }
     
     @FXML
-    private void handleInstructionsAction(ActionEvent event){
-        
+    private void handleInstructionsAction(ActionEvent event) throws IOException{
+        Parent screen2Parent = FXMLLoader.load(getClass().getResource("WarInstructionsScreen.fxml"));
+        Scene screen2Scene = new Scene(screen2Parent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(screen2Scene);
+        window.show();
     }
     
     private void pileToHand(){
