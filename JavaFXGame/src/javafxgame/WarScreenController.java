@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javax.annotation.Resources;
 
 /**
@@ -21,8 +22,20 @@ import javax.annotation.Resources;
  * @author ross
  */
 public class WarScreenController implements Initializable {
-
+    
+    GameOfWar gow;
+    
     //card pile declarations
+    @FXML
+    Text youText;
+    @FXML
+    Button btnQuit;
+    @FXML
+    Button btnInstructions;
+    @FXML
+    Button btnDrawCompare;
+    @FXML
+    Button btnPlay;
     @FXML
     ImageView warDeck; 
     @FXML
@@ -55,6 +68,17 @@ public class WarScreenController implements Initializable {
     ImageView plr2WarCompare;
     
     @FXML
+    private void handlePlayAction(ActionEvent event){
+        //set play button and deck visibility to false
+        btnPlay.setVisible(false);
+        warDeck.setVisible(false);
+        
+        
+        
+        
+    }
+    
+    @FXML
     private void handleDrawCompareAction(ActionEvent event){
         
     }
@@ -70,16 +94,36 @@ public class WarScreenController implements Initializable {
     }
     
     
+    
+    
    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
         Image image = new Image("javafxgame/images/back.png");
         warDeck.setImage(image);
-        warDeck.setVisible(false);
+        //Initialize all pile visibility properties.
+        warDeck.setVisible(true);
+        plr1WinHand.setVisible(false);
+        plr2WinHand.setVisible(false);
+        plr1Hand.setVisible(false);
+        plr2Hand.setVisible(false);
+        plr1Compare.setVisible(false);
+        plr2Compare.setVisible(false);
+        plr1WarCard1.setVisible(false);
+        plr1WarCard2.setVisible(false);
+        plr1WarCard3.setVisible(false);
+        plr2WarCard1.setVisible(false);
+        plr2WarCard2.setVisible(false);
+        plr2WarCard3.setVisible(false);
+        plr1WarCompare.setVisible(false);
+        plr2WarCompare.setVisible(false);
+        youText.setVisible(false);
+        btnDrawCompare.setVisible(false);
+        btnPlay.setVisible(true);
         
     }    
     
