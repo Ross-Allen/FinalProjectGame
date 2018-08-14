@@ -79,6 +79,14 @@ public class WarScreenController implements Initializable {
         btnPlay.setVisible(false);
         warDeck.setVisible(false);
         btnDrawCompare.setVisible(true);
+        plr1WarCard1.setVisible(false);
+        plr1WarCard2.setVisible(false);
+        plr1WarCard3.setVisible(false);
+        plr2WarCard1.setVisible(false);
+        plr2WarCard2.setVisible(false);
+        plr2WarCard3.setVisible(false);
+        plr1WarCompare.setVisible(false);
+        plr2WarCompare.setVisible(false);
         
         //create deck and shuffle
         zdeck.shuffle();
@@ -98,10 +106,18 @@ public class WarScreenController implements Initializable {
     @FXML
     private void handleDrawCompareAction(ActionEvent event) throws InterruptedException{
         //check for winner
-        
         if(zplr1Hand.group.size() > 0 && zplr2Hand.group.size() > 0){
             //validate that players hand have sufficient for dealing
             if(zplr1Hand.group.size() > 0 && zplr2Hand.group.size() > 0){
+                plr1WarCard1.setVisible(false);
+                plr1WarCard2.setVisible(false);
+                plr1WarCard3.setVisible(false);
+                plr2WarCard1.setVisible(false);
+                plr2WarCard2.setVisible(false);
+                plr2WarCard3.setVisible(false);
+                plr1WarCompare.setVisible(false);
+                plr2WarCompare.setVisible(false);
+                
                 winText.setVisible(false);
                 if(plr1WinCount > 0){
                     Image plr1WinImage = new Image("javafxgame/images/" + (zplr1WinHand.group.get(zplr1WinHand.group.size()-1).number.getValue() + zplr1WinHand.group.get(zplr1WinHand.group.size()-1).suit.getSuit()) + ".png");
@@ -161,22 +177,25 @@ public class WarScreenController implements Initializable {
                         break;
                     case 0:      //tie (war)
                         war();
-                        plr1WarCard1.setVisible(false);
-                        plr1WarCard2.setVisible(false);
-                        plr1WarCard3.setVisible(false);
-                        plr2WarCard1.setVisible(false);
-                        plr2WarCard2.setVisible(false);
-                        plr2WarCard3.setVisible(false);
-                        plr1WarCompare.setVisible(false);
-                        plr2WarCompare.setVisible(false);
-                        
                         break;
                     default:
                         System.out.println("Error: two cards did not compare properly");
                         break;
                 }//end switch
+                if(zplr1Hand.group.size() < 1){
+                    plr1WinHand.setVisible(false);
+                }
+                if(zplr2Hand.group.size() < 1){
+                    plr2WinHand.setVisible(false);
+                }
                 pileToHand();
             }else{
+                if(zplr1Hand.group.size() < 1){
+                    plr1WinHand.setVisible(false);
+                }
+                if(zplr2Hand.group.size() < 1){
+                    plr2WinHand.setVisible(false);
+                }
                 pileToHand();
             }
         }else{
@@ -205,16 +224,16 @@ public class WarScreenController implements Initializable {
     }
     
     private void pileToHand(){
+        System.out.println("Player 1's hand is at: " + zplr1Hand.group.size());
+        System.out.println("Player 2's hand is at: " + zplr2Hand.group.size());
         if(zplr1Hand.group.size() < 1){
             System.out.println("Player 1 pile to hand");
-            plr1WinHand.setVisible(false);
             for(int i = 0; i < zplr1WinHand.group.size(); i++){
                 zplr1Hand.group.add(zplr1WinHand.group.remove(0));
             }
         }
         if(zplr2Hand.group.size() < 1){
-            System.out.println("Player 1 pile to hand");
-            plr2WinHand.setVisible(false);
+            System.out.println("Player 2 pile to hand");
             for(int i = 0; i < zplr2WinHand.group.size(); i++){
                 zplr2Hand.group.add(zplr2WinHand.group.remove(0));
             }
@@ -225,8 +244,6 @@ public class WarScreenController implements Initializable {
      * War method
      */
     public void war(){
-        
-        do{
             //local war method attributes
             int result;
             int count = 0;
@@ -292,7 +309,6 @@ public class WarScreenController implements Initializable {
                         break;
                 }//end switch
             }
-        }while(zplr1Comparable.group.get(zplr1Comparable.group.size()-1) == zplr2Comparable.group.get(zplr2Comparable.group.size()-1));
         
     }//end war method
     
