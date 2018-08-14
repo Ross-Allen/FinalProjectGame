@@ -57,4 +57,9 @@ public class MainMenuController implements Initializable {
         window.show();
     }
     
+    @FXML
+    private void exitHandler(ActionEvent event){
+        System.exit(0);
+    }
+    
 }
