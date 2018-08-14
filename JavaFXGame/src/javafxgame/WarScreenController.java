@@ -88,16 +88,23 @@ public class WarScreenController implements Initializable {
         plr1WarCompare.setVisible(false);
         plr2WarCompare.setVisible(false);
         
+        System.out.println("Deck has total of " + zdeck.group.size() + " cards.");
         //create deck and shuffle
         zdeck.shuffle();
+        System.out.println("Deck has total of " + zdeck.group.size() + " cards after shuffle.");
+
+        int size = zdeck.group.size();
         //split deck
-        for(int i = 0; i < zdeck.group.size(); i++){
+        for(int i = 0; i < size; i++){
             if(i % 2 == 0){
                 zplr1Hand.group.add(zdeck.group.remove(0));
             }else{
                 zplr2Hand.group.add(zdeck.group.remove(0));
             }
         }
+        System.out.println("Player 1's hand has " + zplr1Hand.group.size() + " cards.");
+        System.out.println("Player 2's hand has " + zplr2Hand.group.size() + " cards.");
+
         //show placeholder
         plr1Hand.setVisible(true);
         plr2Hand.setVisible(true); 
