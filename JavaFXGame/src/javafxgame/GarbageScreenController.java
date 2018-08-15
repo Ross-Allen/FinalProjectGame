@@ -16,7 +16,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -85,6 +87,13 @@ public class GarbageScreenController implements Initializable {
     Text discardText;
     @FXML
     Text drawText;
+    
+    private GroupOfCards zDeck;
+    private GroupOfCards zDiscard;
+    private GroupOfCards zDraw;
+    private GroupOfCards zPlr1Hand;
+    private GroupOfCards zPlr2Hand;
+    
    
     @FXML
     private void handleShuffleAndPlay(ActionEvent event){
@@ -114,7 +123,39 @@ public class GarbageScreenController implements Initializable {
         drawText.setVisible(true);
         deck.setVisible(false);
         btnShuffleAndPlay.setVisible(false);
+        
+        //deck count before shuffle
+        System.out.println("Deck has total of " + zDeck.group.size() + " cards.");
+        //create deck and shuffle
+        zDeck.shuffle();
+        System.out.println("Deck has total of " + zDeck.group.size() + " cards after shuffle.");
+
+        //split deck
+        for(int i = 0; i < 20; i++){
+            if(i % 2 == 0){
+                zPlr1Hand.group.add(zDeck.group.remove(0));
+            }else{
+                zPlr2Hand.group.add(zDeck.group.remove(0));
+            }
+        }
+        System.out.println("Player 1's hand has " + zPlr1Hand.group.size() + " cards.");
+        System.out.println("Player 2's hand has " + zPlr2Hand.group.size() + " cards.");
+        
+        //draw top card of deck to discard.
+        zDraw.group = zDeck.group;
+        zDiscard.group.add(zDraw.dealCard());
+        Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
+        discardPile.setImage(discardImage);
     }// end shuffle and play method
+    
+    @FXML
+    private void handleDiscardDrawClick(MouseEvent event){
+        
+    }
+    
+    
+    
+    
     
     /**
      * back to main method
@@ -176,6 +217,13 @@ public class GarbageScreenController implements Initializable {
         btnInstruction.setVisible(true);
         btnBack.setVisible(true);
         btnShuffleAndPlay.setVisible(true);
+        //initialize 
+        zDeck = new Deck();
+        zDiscard = new Hand();
+        zDraw = new Hand();
+        zPlr1Hand = new Hand();
+        zPlr2Hand = new Hand();
+        
     }    
     
 }
