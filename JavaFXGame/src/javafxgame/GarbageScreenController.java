@@ -7,6 +7,8 @@ package javafxgame;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -93,7 +95,8 @@ public class GarbageScreenController implements Initializable {
     private GroupOfCards zDraw;
     private GroupOfCards zPlr1Hand;
     private GroupOfCards zPlr2Hand;
-    
+    private boolean isPlayer1Turn = true;
+    private Card returnedCard;
    
     @FXML
     private void handleShuffleAndPlay(ActionEvent event){
@@ -129,7 +132,7 @@ public class GarbageScreenController implements Initializable {
         //create deck and shuffle
         zDeck.shuffle();
         System.out.println("Deck has total of " + zDeck.group.size() + " cards after shuffle.");
-
+       
         //split deck
         for(int i = 0; i < 20; i++){
             if(i % 2 == 0){
@@ -146,16 +149,127 @@ public class GarbageScreenController implements Initializable {
         zDiscard.group.add(zDraw.dealCard());
         Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
         discardPile.setImage(discardImage);
+        
     }// end shuffle and play method
     
     @FXML
     private void handleDiscardClick(MouseEvent event){
+        System.out.println("You clicked the discard pile");
+        System.out.println("Discard pile card count: " + zDiscard.group.size());
+        //handle if card is king
         
+        //discard pile length 1 hide pile after draw
+        if(zDiscard.group.size() <= 1){
+            if(isPlayer1Turn){
+                //remove card from top of discard pile
+                Card chosenCard = zDiscard.dealCard();
+                int chosenCardValue = chosenCard.number.getValue();
+                //check for king
+                if(chosenCardValue == 13){
+                    //TODO
+                }else{
+                    //do{
+                        returnedCard = placeCard(chosenCard,zPlr1Hand);
+                    //}while(returnedCard.number.getValue() > 0 && returnedCard.number.getValue() < 15);
+                    
+                    //put returned card into discard
+                    Collections.reverse(zDiscard.group);
+                    zDiscard.group.add(returnedCard);
+                    Collections.reverse(zDiscard.group);
+                    //reset image
+                    Image discardImage = new Image("javafxgame/images/" + (returnedCard.number.getValue() + returnedCard.suit.getSuit()) + ".png");
+                    discardPile.setImage(discardImage);
+                }
+                
+            }else{
+               //for player 2 
+            }
+        }else{
+            //for player 1 without hidding discard pile
+
+            if(isPlayer1Turn){
+                //for 
+            }else{
+            
+            }
+        }
     }
-     
+    
+    private Card placeCard(Card card, GroupOfCards plrHand){ 
+        //temp return card
+        Card returnCard = card;
+        //get card value
+        int cardValue = card.number.getValue();
+        //if Ace change to 1
+        if(cardValue == 14){
+            cardValue = 1;
+        }
+        for(int i = 1; i <= plrHand.group.size(); i++){
+            //if card can go somewhere
+            if(cardValue == i){
+                
+                switch(cardValue){
+                    case 1:
+                        Image curr1 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                        plr1Pos1.setImage(curr1);
+                        break;
+                    case 2: 
+                        Image curr2 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                        plr1Pos2.setImage(curr2);
+                        break;
+                    case 3:
+                        Image curr3 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                        plr1Pos3.setImage(curr3);
+                        break;
+                    case 4:
+                        Image curr4 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                        plr1Pos4.setImage(curr4);
+                        break;
+                    case 5:
+                        Image curr5 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                        plr1Pos4.setImage(curr5);
+                        break;
+                    case 6:
+                        Image curr6 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                        plr1Pos4.setImage(curr6);
+                        break;
+                    case 7:
+                        Image curr7 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                        plr1Pos4.setImage(curr7);
+                        break;
+                    case 8:
+                        Image curr8 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                        plr1Pos4.setImage(curr8);
+                        break;
+                    case 9:
+                        Image curr9 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                        plr1Pos4.setImage(curr9);
+                        break;
+                    case 10:
+                        Image curr10 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                        plr1Pos4.setImage(curr10);
+                        break;
+                    default:break;
+                
+                }
+          
+                //get card that is getting replaced
+                returnCard = plrHand.group.get(i-1);
+                plrHand.group.add((i-1),card);
+                //check card getting replaced
+                return returnCard;
+            }       
+        }
+        return returnCard;
+    }
+    
     @FXML
     private void handleDrawClick(MouseEvent event){
+        //draw pile length 1 hide pile after draw
+        if(zDraw.group.size() <= 1){
+        }else{
         
+        }
     }
     
     
@@ -228,6 +342,8 @@ public class GarbageScreenController implements Initializable {
         zDraw = new Hand();
         zPlr1Hand = new Hand();
         zPlr2Hand = new Hand();
+        isPlayer1Turn = true;
+        
         
     }    
     
