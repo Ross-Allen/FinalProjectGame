@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -30,6 +31,8 @@ public class GarbageScreenController implements Initializable {
     Button btnInstruction;
     @FXML
     Button btnBack;
+    @FXML
+    Button btnShuffleAndPlay;
     
     //label card imageview for players
     @FXML
@@ -78,21 +81,40 @@ public class GarbageScreenController implements Initializable {
     ImageView drawPile;
     @FXML
     ImageView deck;
+    @FXML
+    Text discardText;
+    @FXML
+    Text drawText;
    
+    @FXML
     private void handleShuffleAndPlay(ActionEvent event){
-    
+        plr1Pos1.setVisible(true);
+        plr1Pos2.setVisible(true);
+        plr1Pos3.setVisible(true);
+        plr1Pos4.setVisible(true);
+        plr1Pos5.setVisible(true);
+        plr1Pos6.setVisible(true);
+        plr1Pos7.setVisible(true);
+        plr1Pos8.setVisible(true);
+        plr1Pos9.setVisible(true);
+        plr1Pos10.setVisible(true);
+        plr2Pos1.setVisible(true);
+        plr2Pos2.setVisible(true);
+        plr2Pos3.setVisible(true);
+        plr2Pos4.setVisible(true);
+        plr2Pos5.setVisible(true);
+        plr2Pos6.setVisible(true);
+        plr2Pos7.setVisible(true);
+        plr2Pos8.setVisible(true);
+        plr2Pos9.setVisible(true);
+        plr2Pos10.setVisible(true);
+        discardPile.setVisible(true);
+        drawPile.setVisible(true);
+        discardText.setVisible(true);
+        drawText.setVisible(true);
+        deck.setVisible(false);
+        btnShuffleAndPlay.setVisible(false);
     }// end shuffle and play method
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     /**
      * back to main method
@@ -126,8 +148,34 @@ public class GarbageScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
-        
+        plr1Pos1.setVisible(false);
+        plr1Pos2.setVisible(false);
+        plr1Pos3.setVisible(false);
+        plr1Pos4.setVisible(false);
+        plr1Pos5.setVisible(false);
+        plr1Pos6.setVisible(false);
+        plr1Pos7.setVisible(false);
+        plr1Pos8.setVisible(false);
+        plr1Pos9.setVisible(false);
+        plr1Pos10.setVisible(false);
+        plr2Pos1.setVisible(false);
+        plr2Pos2.setVisible(false);
+        plr2Pos3.setVisible(false);
+        plr2Pos4.setVisible(false);
+        plr2Pos5.setVisible(false);
+        plr2Pos6.setVisible(false);
+        plr2Pos7.setVisible(false);
+        plr2Pos8.setVisible(false);
+        plr2Pos9.setVisible(false);
+        plr2Pos10.setVisible(false);
+        discardPile.setVisible(false);
+        drawPile.setVisible(false);
+        discardText.setVisible(false);
+        drawText.setVisible(false);
+        deck.setVisible(true);
+        btnInstruction.setVisible(true);
+        btnBack.setVisible(true);
+        btnShuffleAndPlay.setVisible(true);
     }    
     
 }

@@ -133,17 +133,17 @@
             <Image url="@images/back.png" />
          </image>
       </ImageView>
-      <Text fx:id="youText" layoutX="497.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discard">
+      <Text fx:id="discardText" layoutX="497.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discard">
          <font>
             <Font name="Lucida Grande Bold" size="17.0" />
          </font>
       </Text>
-      <Text fx:id="youText1" layoutX="598.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Draw">
+      <Text fx:id="drawText" layoutX="598.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Draw">
          <font>
             <Font name="Lucida Grande Bold" size="17.0" />
          </font>
       </Text>
-      <Button fx:id="btnPlay" layoutX="150.0" layoutY="253.0" mnemonicParsing="false" stylesheets="@mainmenu.css" text="Shuffle and Play!">
+      <Button fx:id="btnShuffleAndPlay" layoutX="150.0" layoutY="253.0" mnemonicParsing="false" onAction="#handleShuffleAndPlay" stylesheets="@mainmenu.css" text="Shuffle and Play!">
          <font>
             <Font name="Lucida Bright Demibold" size="22.0" />
          </font>
