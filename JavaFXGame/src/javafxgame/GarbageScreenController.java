@@ -149,7 +149,12 @@ public class GarbageScreenController implements Initializable {
     }// end shuffle and play method
     
     @FXML
-    private void handleDiscardDrawClick(MouseEvent event){
+    private void handleDiscardClick(MouseEvent event){
+        
+    }
+     
+    @FXML
+    private void handleDrawClick(MouseEvent event){
         
     }
     

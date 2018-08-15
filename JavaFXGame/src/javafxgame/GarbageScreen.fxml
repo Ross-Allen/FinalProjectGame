@@ -123,12 +123,12 @@
             <Image url="@images/back.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="discardPile" fitHeight="106.0" fitWidth="80.0" layoutX="495.0" layoutY="223.0" onMouseClicked="#handleDiscardDrawClick" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="discardPile" fitHeight="106.0" fitWidth="80.0" layoutX="495.0" layoutY="223.0" onMouseClicked="#handleDiscardClick" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/50.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="drawPile" fitHeight="106.0" fitWidth="80.0" layoutX="584.0" layoutY="223.0" onMouseClicked="#handleDiscardDrawClick" pickOnBounds="true" preserveRatio="true" styleClass="imgviewDeck">
+      <ImageView fx:id="drawPile" fitHeight="106.0" fitWidth="80.0" layoutX="584.0" layoutY="223.0" onMouseClicked="#handleDrawClick" pickOnBounds="true" preserveRatio="true" styleClass="imgviewDeck">
          <image>
             <Image url="@images/back.png" />
          </image>
