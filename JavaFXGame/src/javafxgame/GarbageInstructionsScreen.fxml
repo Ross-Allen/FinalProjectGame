@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="700.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="javafxgame.GarbageInstructionsScreenController">
+    <stylesheets>
+        <URL value="@garbageinstructionsscreen.css" />
+    </stylesheets>
+   <children>
+      <Button id="btnQuit" fx:id="buttonBack" layoutX="573.0" layoutY="393.0" mnemonicParsing="false" onAction="#goBackToGarbageScreen" stylesheets="@mainmenu.css" text="Back">
+         <font>
+            <Font name="Lucida Bright Demibold" size="22.0" />
+         </font>
+      </Button>
+      <Text fx:id="winText" layoutX="253.0" layoutY="48.0" opacity="0.6" strokeType="OUTSIDE" strokeWidth="0.0" text="How to play!">
+         <font>
+            <Font name="Lucida Grande Bold" size="35.0" />
+         </font>
+      </Text>
+      <Text fx:id="winText1" layoutX="110.0" layoutY="79.0" opacity="0.6" strokeType="OUTSIDE" strokeWidth="0.0" text="The Deal" underline="true">
+         <font>
+            <Font name="Lucida Grande Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="winText11" layoutX="112.0" layoutY="202.0" opacity="0.6" strokeType="OUTSIDE" strokeWidth="0.0" text="The Play" underline="true">
+         <font>
+            <Font name="Lucida Grande Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="winText12" layoutX="234.0" layoutY="401.0" opacity="0.6" strokeType="OUTSIDE" strokeWidth="0.0" text="How to Keep Score" underline="true">
+         <font>
+            <Font name="Lucida Grande Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="winText111" layoutX="111.0" layoutY="98.0" opacity="0.6" strokeType="OUTSIDE" strokeWidth="0.0" text="The deck is shuffled and each player is delt two rows of five cards. All of which are face down. Anyone may deal first. Each player places his two rows of cards face down in front of him. The remaining stack of cards are placed between each player with one card drawn face up to the left of said stack acting as a discard pile." wrappingWidth="560.0">
+         <font>
+            <Font name="Lucida Grande Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="winText1111" layoutX="111.0" layoutY="222.0" opacity="0.6" strokeType="OUTSIDE" strokeWidth="0.0" text="Each players set cards are numbered positions one through ten reading from top left to bottom right. Players will take turns drawing from either the draw pile or the discard pile. If the card number matches the position value (1-10) then it replaces the card of that positional value in the players set of ten cards. This card is placed face up. The card that was originally in that position is then examined. If it can take the place of another position in the set of ten cards, then it is placed there face up. So on and so forth. If at any time the card cannot fill any open positions, it is discarded face up." wrappingWidth="560.0">
+         <font>
+            <Font name="Lucida Grande Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="winText11111" layoutX="111.0" layoutY="354.0" opacity="0.6" strokeType="OUTSIDE" strokeWidth="0.0" text="If a King is drawn, it is considered to be wild and acts like any position value one through ten." wrappingWidth="560.0">
+         <font>
+            <Font name="Lucida Grande Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="winText11113" layoutX="203.0" layoutY="420.0" opacity="0.6" strokeType="OUTSIDE" strokeWidth="0.0" text="The game ends when one player has all ten positions face up." wrappingWidth="325.0">
+         <font>
+            <Font name="Lucida Grande Bold" size="14.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

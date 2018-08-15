@@ -23,19 +23,20 @@ import javafx.stage.Stage;
  *
  * @author ross
  */
-public class GarbageScreenController implements Initializable {
-
-    @FXML
-    Button btnInstruction;
+public class GarbageInstructionsScreenController implements Initializable {
     
     @FXML
-    private void handleInstructionAction(ActionEvent event) throws IOException{
-        Parent screen2Parent = FXMLLoader.load(getClass().getResource("GarbageInstructionsScreen.fxml"));
+    Button buttonBack;
+    
+    @FXML
+    private void goBackToGarbageScreen(ActionEvent event) throws IOException{
+        Parent screen2Parent = FXMLLoader.load(getClass().getResource("GarbageScreen.fxml"));
         Scene screen2Scene = new Scene(screen2Parent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(screen2Scene);
         window.show();
     }
+    
     /**
      * Initializes the controller class.
      */
