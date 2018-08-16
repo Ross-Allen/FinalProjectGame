@@ -298,7 +298,7 @@ public class GarbageScreenController implements Initializable {
                         default:break;
                     }//end switch
                     //get card that is getting replaced
-                    returnCard = plrHand.group.get(i-1);
+                    returnCard = plrHand.group.remove(i-1);
                     //add card to spot
                     plrHand.group.add((i-1),card);
                 }       
