@@ -89,6 +89,10 @@ public class GarbageScreenController implements Initializable {
     Text discardText;
     @FXML
     Text drawText;
+    @FXML
+    Text plr1Turn;
+    @FXML
+    Text plr2Turn;
     
     private GroupOfCards zDeck;
     private GroupOfCards zDiscard;
@@ -102,6 +106,7 @@ public class GarbageScreenController implements Initializable {
    
     @FXML
     private void handleShuffleAndPlay(ActionEvent event){
+        plr1Turn.setVisible(true);
         plr1Pos1.setVisible(true);
         plr1Pos2.setVisible(true);
         plr1Pos3.setVisible(true);
@@ -165,7 +170,7 @@ public class GarbageScreenController implements Initializable {
                     cardValue = 1;
                 }
                 //check flag
-                if(zPlr1FlagList[ cardValue - 1]){ 
+                if(zPlr1FlagList[cardValue - 1]){ 
                     Collections.reverse(zDiscard.group);
                     zDiscard.group.add(returnedCard);
                     Collections.reverse(zDiscard.group);
@@ -184,21 +189,21 @@ public class GarbageScreenController implements Initializable {
                     returnedCard.number.getValue() <= 10) ||
                     returnedCard.number.getValue() == 14); 
         }else{
-            //for player 2 
             //remove card from top of discard pile
-            Card chosenCard = zDiscard.dealCard();
-            int chosenCardValue = chosenCard.number.getValue();
-            returnedCard = placeCard(chosenCard,zPlr2Hand);
-             //put returned card into discard
-            Collections.reverse(zDiscard.group);
-            zDiscard.group.add(returnedCard);
-            Collections.reverse(zDiscard.group);
-            //reset image
-            Image discardImage = new Image("javafxgame/images/" + (returnedCard.number.getValue() + returnedCard.suit.getSuit()) + ".png");
-            discardPile.setImage(discardImage);
-            while((returnedCard.number.getValue() >= 1 &&
-                  returnedCard.number.getValue() <= 10) ||
-                  returnedCard.number.getValue() == 14){
+            Card returnedCard = zDiscard.dealCard();
+            
+            do{
+                int cardValue = returnedCard.number.getValue();
+                if(cardValue == 14){
+                    cardValue = 1;
+                }
+                //check flag
+                if(zPlr2FlagList[cardValue - 1]){ 
+                    Collections.reverse(zDiscard.group);
+                    zDiscard.group.add(returnedCard);
+                    Collections.reverse(zDiscard.group);
+                    break;
+                }
                 //call placeCard method
                 returnedCard = placeCard(returnedCard,zPlr2Hand);
                 //put returned card into discard
@@ -206,12 +211,23 @@ public class GarbageScreenController implements Initializable {
                 zDiscard.group.add(returnedCard);
                 Collections.reverse(zDiscard.group);
                 //reset image
-                Image discardImage2 = new Image("javafxgame/images/" + (returnedCard.number.getValue() + returnedCard.suit.getSuit()) + ".png");
-                discardPile.setImage(discardImage2);
-            }
+                Image discardImage = new Image("javafxgame/images/" + (returnedCard.number.getValue() + returnedCard.suit.getSuit()) + ".png");
+                discardPile.setImage(discardImage);
+            }while((returnedCard.number.getValue() >= 1 &&
+                    returnedCard.number.getValue() <= 10) ||
+                    returnedCard.number.getValue() == 14); 
         }
         //switch turnes
         isPlayer1Turn = !isPlayer1Turn;
+        if(isPlayer1Turn){
+            plr1Turn.setVisible(true);
+            plr2Turn.setVisible(false);
+        }else{
+            plr1Turn.setVisible(false);
+            plr2Turn.setVisible(true);
+        }
+        
+        
     }
     
     private Card placeCard(Card card, GroupOfCards plrHand){ 
@@ -223,63 +239,114 @@ public class GarbageScreenController implements Initializable {
         if(cardValue == 14){
             cardValue = 1;
         }
-        //TODO ifPlayer1Turn if else
-        for(int i = 1; i <= plrHand.group.size(); i++){
-            //if card can go somewhere
-            if(cardValue == i){
-                //flag spot
-                zPlr1FlagList[i-1] = true;
-                switch(cardValue){
-                    case 1:
-                        Image curr1 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
-                        plr1Pos1.setImage(curr1);
-                        break;
-                    case 2: 
-                        Image curr2 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
-                        plr1Pos2.setImage(curr2);
-                        break;
-                    case 3:
-                        Image curr3 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
-                        plr1Pos3.setImage(curr3);
-                        break;
-                    case 4:
-                        Image curr4 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
-                        plr1Pos4.setImage(curr4);
-                        break;
-                    case 5:
-                        Image curr5 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
-                        plr1Pos5.setImage(curr5);
-                        break;
-                    case 6:
-                        Image curr6 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
-                        plr1Pos6.setImage(curr6);
-                        break;
-                    case 7:
-                        Image curr7 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
-                        plr1Pos7.setImage(curr7);
-                        break;
-                    case 8:
-                        Image curr8 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
-                        plr1Pos8.setImage(curr8);
-                        break;
-                    case 9:
-                        Image curr9 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
-                        plr1Pos9.setImage(curr9);
-                        break;
-                    case 10:
-                        Image curr10 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
-                        plr1Pos10.setImage(curr10);
-                        break;
-                    default:break;
-                
-                }
-          
-                //get card that is getting replaced
-                returnCard = plrHand.group.get(i-1);
-                plrHand.group.add((i-1),card);
-                //check card getting replaced
-                return returnCard;
-            }       
+        if(isPlayer1Turn){
+            for(int i = 1; i <= plrHand.group.size(); i++){
+                //if card can go somewhere
+                if(cardValue == i){
+                    //flag spot
+                    zPlr1FlagList[i-1] = true;
+                    switch(cardValue){
+                        case 1:
+                            Image curr1 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr1Pos1.setImage(curr1);
+                            break;
+                        case 2: 
+                            Image curr2 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr1Pos2.setImage(curr2);
+                            break;
+                        case 3:
+                            Image curr3 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr1Pos3.setImage(curr3);
+                            break;
+                        case 4:
+                            Image curr4 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr1Pos4.setImage(curr4);
+                            break;
+                        case 5:
+                            Image curr5 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr1Pos5.setImage(curr5);
+                            break;
+                        case 6:
+                            Image curr6 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr1Pos6.setImage(curr6);
+                            break;
+                        case 7:
+                            Image curr7 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr1Pos7.setImage(curr7);
+                            break;
+                        case 8:
+                            Image curr8 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr1Pos8.setImage(curr8);
+                            break;
+                        case 9:
+                            Image curr9 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr1Pos9.setImage(curr9);
+                            break;
+                        case 10:
+                            Image curr10 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr1Pos10.setImage(curr10);
+                            break;
+                        default:break;
+                    }//end switch
+                    //get card that is getting replaced
+                    returnCard = plrHand.group.get(i-1);
+                    plrHand.group.add((i-1),card);
+                }       
+            }
+        }else{
+            for(int i = 1; i <= plrHand.group.size(); i++){
+                //if card can go somewhere
+                if(cardValue == i){
+                    //flag spot
+                    zPlr2FlagList[i-1] = true;
+                    switch(cardValue){
+                        case 1:
+                            Image curr1 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr2Pos1.setImage(curr1);
+                            break;
+                        case 2: 
+                            Image curr2 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr2Pos2.setImage(curr2);
+                            break;
+                        case 3:
+                            Image curr3 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr2Pos3.setImage(curr3);
+                            break;
+                        case 4:
+                            Image curr4 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr2Pos4.setImage(curr4);
+                            break;
+                        case 5:
+                            Image curr5 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr2Pos5.setImage(curr5);
+                            break;
+                        case 6:
+                            Image curr6 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr2Pos6.setImage(curr6);
+                            break;
+                        case 7:
+                            Image curr7 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr2Pos7.setImage(curr7);
+                            break;
+                        case 8:
+                            Image curr8 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr2Pos8.setImage(curr8);
+                            break;
+                        case 9:
+                            Image curr9 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr2Pos9.setImage(curr9);
+                            break;
+                        case 10:
+                            Image curr10 = new Image("javafxgame/images/" + (card.number.getValue() + card.suit.getSuit()) + ".png");
+                            plr2Pos10.setImage(curr10);
+                            break;
+                        default:break;
+                    }//end switch
+                    //get card that is getting replaced
+                    returnCard = plrHand.group.get(i-1);
+                    plrHand.group.add((i-1),card);
+                }       
+            }
         }
         return returnCard;
     }
@@ -329,6 +396,8 @@ public class GarbageScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        plr1Turn.setVisible(false);
+        plr2Turn.setVisible(false);
         plr1Pos1.setVisible(false);
         plr1Pos2.setVisible(false);
         plr1Pos3.setVisible(false);
