@@ -93,6 +93,8 @@ public class GarbageScreenController implements Initializable {
     Text plr1Turn;
     @FXML
     Text plr2Turn;
+    @FXML
+    Text WIN;
     
     private GroupOfCards zDeck;
     private GroupOfCards zDiscard;
@@ -134,6 +136,7 @@ public class GarbageScreenController implements Initializable {
         deck.setVisible(false);
         btnShuffleAndPlay.setVisible(false);
         
+        
         //deck count before shuffle
         System.out.println("Deck has total of " + zDeck.group.size() + " cards.");
         //create deck and shuffle
@@ -167,12 +170,6 @@ public class GarbageScreenController implements Initializable {
             
             do{
                 if(returnedCard.number.getValue() > 10 && returnedCard.number.getValue() != 14){
-                    Collections.reverse(zDiscard.group);
-                    zDiscard.group.add(returnedCard);
-                    Collections.reverse(zDiscard.group);
-                    //reset image
-                    Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
-                    discardPile.setImage(discardImage);
                     break;
                 }
                 int cardValue = returnedCard.number.getValue();
@@ -181,38 +178,29 @@ public class GarbageScreenController implements Initializable {
                 }
                 //check flag
                 if(zPlr1FlagList[cardValue - 1]){ 
-                    Collections.reverse(zDiscard.group);
-                    zDiscard.group.add(returnedCard);
-                    Collections.reverse(zDiscard.group);
-                    //reset image
-                    Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
-                    discardPile.setImage(discardImage);
                     break;
                 }
                 //call placeCard method
                 returnedCard = placeCard(returnedCard,zPlr1Hand);
-                //put returned card into discard
-                Collections.reverse(zDiscard.group);
-                zDiscard.group.add(returnedCard);
-                Collections.reverse(zDiscard.group);
-                //reset image
-                Image discardImage = new Image("javafxgame/images/" + (returnedCard.number.getValue() + returnedCard.suit.getSuit()) + ".png");
-                discardPile.setImage(discardImage);
+                
             }while((returnedCard.number.getValue() >= 1 &&
                     returnedCard.number.getValue() <= 10) ||
                     returnedCard.number.getValue() == 14); 
+            
+            //put returned card into discard
+            Collections.reverse(zDiscard.group);
+            zDiscard.group.add(returnedCard);
+            Collections.reverse(zDiscard.group);
+            //reset image
+            Image discardImage = new Image("javafxgame/images/" + (returnedCard.number.getValue() + returnedCard.suit.getSuit()) + ".png");
+            discardPile.setImage(discardImage);
+            
         }else{
             //remove card from top of discard pile
             Card returnedCard = zDiscard.dealCard();
             
             do{
                 if(returnedCard.number.getValue() > 10 && returnedCard.number.getValue() != 14){
-                    Collections.reverse(zDiscard.group);
-                    zDiscard.group.add(returnedCard);
-                    Collections.reverse(zDiscard.group);
-                    //reset image
-                    Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
-                    discardPile.setImage(discardImage);
                     break;
                 }
                 int cardValue = returnedCard.number.getValue();
@@ -221,27 +209,23 @@ public class GarbageScreenController implements Initializable {
                 }
                 //check flag
                 if(zPlr2FlagList[cardValue - 1]){ 
-                    Collections.reverse(zDiscard.group);
-                    zDiscard.group.add(returnedCard);
-                    Collections.reverse(zDiscard.group);
-                    //reset image
-                    Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
-                    discardPile.setImage(discardImage);
                     break;
                 }
                 //call placeCard method
                 returnedCard = placeCard(returnedCard,zPlr2Hand);
-                //put returned card into discard
-                Collections.reverse(zDiscard.group);
-                zDiscard.group.add(returnedCard);
-                Collections.reverse(zDiscard.group);
-                //reset image
-                Image discardImage = new Image("javafxgame/images/" + (returnedCard.number.getValue() + returnedCard.suit.getSuit()) + ".png");
-                discardPile.setImage(discardImage);
+                
             }while((returnedCard.number.getValue() >= 1 &&
                     returnedCard.number.getValue() <= 10) ||
                     returnedCard.number.getValue() == 14); 
+            //put returned card into discard
+            Collections.reverse(zDiscard.group);
+            zDiscard.group.add(returnedCard);
+            Collections.reverse(zDiscard.group);
+            //reset image
+            Image discardImage = new Image("javafxgame/images/" + (returnedCard.number.getValue() + returnedCard.suit.getSuit()) + ".png");
+            discardPile.setImage(discardImage);
         }
+        checkWin();
         //switch turnes
         isPlayer1Turn = !isPlayer1Turn;
         if(isPlayer1Turn){
@@ -315,6 +299,7 @@ public class GarbageScreenController implements Initializable {
                     }//end switch
                     //get card that is getting replaced
                     returnCard = plrHand.group.get(i-1);
+                    //add card to spot
                     plrHand.group.add((i-1),card);
                 }       
             }
@@ -368,7 +353,7 @@ public class GarbageScreenController implements Initializable {
                         default:break;
                     }//end switch
                     //get card that is getting replaced
-                    returnCard = plrHand.group.get(i-1);
+                    returnCard = plrHand.group.remove(i-1);
                     plrHand.group.add((i-1),card);
                 }       
             }
@@ -390,12 +375,6 @@ public class GarbageScreenController implements Initializable {
             
             do{
                 if(returnedCard.number.getValue() > 10 && returnedCard.number.getValue() != 14){
-                    Collections.reverse(zDiscard.group);
-                    zDiscard.group.add(returnedCard);
-                    Collections.reverse(zDiscard.group);
-                    //reset image
-                    Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
-                    discardPile.setImage(discardImage);
                     break;
                 }
                 int cardValue = returnedCard.number.getValue();
@@ -404,38 +383,27 @@ public class GarbageScreenController implements Initializable {
                 }
                 //check flag
                 if(zPlr1FlagList[cardValue - 1]){ 
-                    Collections.reverse(zDiscard.group);
-                    zDiscard.group.add(returnedCard);
-                    Collections.reverse(zDiscard.group);
-                    //reset image
-                    Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
-                    discardPile.setImage(discardImage);
                     break;
                 }
                 //call placeCard method
                 returnedCard = placeCard(returnedCard,zPlr1Hand);
-                //put returned card into discard
-                Collections.reverse(zDiscard.group);
-                zDiscard.group.add(returnedCard);
-                Collections.reverse(zDiscard.group);
-                //reset image
-                Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
-                discardPile.setImage(discardImage);
+                
             }while((returnedCard.number.getValue() >= 1 &&
                     returnedCard.number.getValue() <= 10) ||
                     returnedCard.number.getValue() == 14); 
+            //put returned card into discard
+            Collections.reverse(zDiscard.group);
+            zDiscard.group.add(returnedCard);
+            Collections.reverse(zDiscard.group);
+            //reset image
+            Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
+            discardPile.setImage(discardImage);
         }else{
             //remove card from top of discard pile
             Card returnedCard = zDraw.dealCard();
             
             do{
                 if(returnedCard.number.getValue() > 10 && returnedCard.number.getValue() != 14){
-                    Collections.reverse(zDiscard.group);
-                    zDiscard.group.add(returnedCard);
-                    Collections.reverse(zDiscard.group);
-                    //reset image
-                    Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
-                    discardPile.setImage(discardImage);
                     break;
                 }
                 int cardValue = returnedCard.number.getValue();
@@ -444,27 +412,23 @@ public class GarbageScreenController implements Initializable {
                 }
                 //check flag
                 if(zPlr2FlagList[cardValue - 1]){ 
-                    Collections.reverse(zDiscard.group);
-                    zDiscard.group.add(returnedCard);
-                    Collections.reverse(zDiscard.group);
-                    //reset image
-                    Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
-                    discardPile.setImage(discardImage);
                     break;
                 }
                 //call placeCard method
                 returnedCard = placeCard(returnedCard,zPlr2Hand);
-                //put returned card into discard
-                Collections.reverse(zDiscard.group);
-                zDiscard.group.add(returnedCard);
-                Collections.reverse(zDiscard.group);
-                //reset image
-                Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
-                discardPile.setImage(discardImage);
+                
             }while((returnedCard.number.getValue() >= 1 &&
                     returnedCard.number.getValue() <= 10) ||
                     returnedCard.number.getValue() == 14); 
+            //put returned card into discard
+            Collections.reverse(zDiscard.group);
+            zDiscard.group.add(returnedCard);
+            Collections.reverse(zDiscard.group);
+            //reset image
+            Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
+            discardPile.setImage(discardImage);
         }
+        checkWin();
         //switch turnes
         isPlayer1Turn = !isPlayer1Turn;
         if(isPlayer1Turn){
@@ -476,6 +440,28 @@ public class GarbageScreenController implements Initializable {
         }
         System.out.println("Discard pile has a " + zDiscard.group.get(0).number + " of " + zDiscard.group.get(0).suit + " on top.");
         System.out.println("Draw pile has a " + zDraw.group.get(0).number + " of " + zDraw.group.get(0).suit + " on top.");
+    }
+    
+    private void checkWin(){
+        int plr1 = 0;
+        int plr2 = 0;
+        for(int i = 0; i < 10; i++){
+            if(zPlr1FlagList[i]){
+                plr1++;
+            }
+        }
+        for(int i = 0; i < 10; i++){
+            if(zPlr2FlagList[i]){
+                plr2++;
+            }
+        }
+        if(plr1 == 10){
+            WIN.setText("Player 1 wins!");
+            WIN.setVisible(true);
+        }else if(plr2 == 10){
+            WIN.setText("Player 2 wins!");
+            WIN.setVisible(true);
+        }
     }
     
     /**
@@ -509,7 +495,7 @@ public class GarbageScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        WIN.setVisible(false);
         plr1Turn.setVisible(false);
         plr2Turn.setVisible(false);
         plr1Pos1.setVisible(false);
