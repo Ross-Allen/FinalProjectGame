@@ -160,11 +160,21 @@ public class GarbageScreenController implements Initializable {
     
     @FXML
     private void handleDiscardClick(MouseEvent event){
+        discardPile.setVisible(true);
         if(isPlayer1Turn){
             //remove card from top of discard pile
             Card returnedCard = zDiscard.dealCard();
             
             do{
+                if(returnedCard.number.getValue() > 10 && returnedCard.number.getValue() != 14){
+                    Collections.reverse(zDiscard.group);
+                    zDiscard.group.add(returnedCard);
+                    Collections.reverse(zDiscard.group);
+                    //reset image
+                    Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
+                    discardPile.setImage(discardImage);
+                    break;
+                }
                 int cardValue = returnedCard.number.getValue();
                 if(cardValue == 14){
                     cardValue = 1;
@@ -174,6 +184,9 @@ public class GarbageScreenController implements Initializable {
                     Collections.reverse(zDiscard.group);
                     zDiscard.group.add(returnedCard);
                     Collections.reverse(zDiscard.group);
+                    //reset image
+                    Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
+                    discardPile.setImage(discardImage);
                     break;
                 }
                 //call placeCard method
@@ -193,6 +206,15 @@ public class GarbageScreenController implements Initializable {
             Card returnedCard = zDiscard.dealCard();
             
             do{
+                if(returnedCard.number.getValue() > 10 && returnedCard.number.getValue() != 14){
+                    Collections.reverse(zDiscard.group);
+                    zDiscard.group.add(returnedCard);
+                    Collections.reverse(zDiscard.group);
+                    //reset image
+                    Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
+                    discardPile.setImage(discardImage);
+                    break;
+                }
                 int cardValue = returnedCard.number.getValue();
                 if(cardValue == 14){
                     cardValue = 1;
@@ -202,6 +224,9 @@ public class GarbageScreenController implements Initializable {
                     Collections.reverse(zDiscard.group);
                     zDiscard.group.add(returnedCard);
                     Collections.reverse(zDiscard.group);
+                    //reset image
+                    Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
+                    discardPile.setImage(discardImage);
                     break;
                 }
                 //call placeCard method
@@ -226,9 +251,9 @@ public class GarbageScreenController implements Initializable {
             plr1Turn.setVisible(false);
             plr2Turn.setVisible(true);
         }
-        
-        
-    }
+        System.out.println("Discard pile has a " + zDiscard.group.get(0).number + " of " + zDiscard.group.get(0).suit + " on top.");
+        System.out.println("Draw pile has a " + zDraw.group.get(0).number + " of " + zDraw.group.get(0).suit + " on top.");
+    }//end discard click method
     
     private Card placeCard(Card card, GroupOfCards plrHand){ 
         //temp return card
@@ -353,16 +378,105 @@ public class GarbageScreenController implements Initializable {
     
     @FXML
     private void handleDrawClick(MouseEvent event){
-        //draw pile length 1 hide pile after draw
-        if(zDraw.group.size() <= 1){
-        }else{
-        
+        if(zDraw.group.size() <= 0){
+            System.out.println("Draw pile ran out of cards");
+            zDraw = zDiscard;
+            discardPile.setVisible(false);
         }
+        
+         if(isPlayer1Turn){
+            //remove card from top of discard pile
+            Card returnedCard = zDraw.dealCard();
+            
+            do{
+                if(returnedCard.number.getValue() > 10 && returnedCard.number.getValue() != 14){
+                    Collections.reverse(zDiscard.group);
+                    zDiscard.group.add(returnedCard);
+                    Collections.reverse(zDiscard.group);
+                    //reset image
+                    Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
+                    discardPile.setImage(discardImage);
+                    break;
+                }
+                int cardValue = returnedCard.number.getValue();
+                if(cardValue == 14){
+                    cardValue = 1;
+                }
+                //check flag
+                if(zPlr1FlagList[cardValue - 1]){ 
+                    Collections.reverse(zDiscard.group);
+                    zDiscard.group.add(returnedCard);
+                    Collections.reverse(zDiscard.group);
+                    //reset image
+                    Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
+                    discardPile.setImage(discardImage);
+                    break;
+                }
+                //call placeCard method
+                returnedCard = placeCard(returnedCard,zPlr1Hand);
+                //put returned card into discard
+                Collections.reverse(zDiscard.group);
+                zDiscard.group.add(returnedCard);
+                Collections.reverse(zDiscard.group);
+                //reset image
+                Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
+                discardPile.setImage(discardImage);
+            }while((returnedCard.number.getValue() >= 1 &&
+                    returnedCard.number.getValue() <= 10) ||
+                    returnedCard.number.getValue() == 14); 
+        }else{
+            //remove card from top of discard pile
+            Card returnedCard = zDraw.dealCard();
+            
+            do{
+                if(returnedCard.number.getValue() > 10 && returnedCard.number.getValue() != 14){
+                    Collections.reverse(zDiscard.group);
+                    zDiscard.group.add(returnedCard);
+                    Collections.reverse(zDiscard.group);
+                    //reset image
+                    Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
+                    discardPile.setImage(discardImage);
+                    break;
+                }
+                int cardValue = returnedCard.number.getValue();
+                if(cardValue == 14){
+                    cardValue = 1;
+                }
+                //check flag
+                if(zPlr2FlagList[cardValue - 1]){ 
+                    Collections.reverse(zDiscard.group);
+                    zDiscard.group.add(returnedCard);
+                    Collections.reverse(zDiscard.group);
+                    //reset image
+                    Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
+                    discardPile.setImage(discardImage);
+                    break;
+                }
+                //call placeCard method
+                returnedCard = placeCard(returnedCard,zPlr2Hand);
+                //put returned card into discard
+                Collections.reverse(zDiscard.group);
+                zDiscard.group.add(returnedCard);
+                Collections.reverse(zDiscard.group);
+                //reset image
+                Image discardImage = new Image("javafxgame/images/" + (zDiscard.group.get(0).number.getValue() + zDiscard.group.get(0).suit.getSuit()) + ".png");
+                discardPile.setImage(discardImage);
+            }while((returnedCard.number.getValue() >= 1 &&
+                    returnedCard.number.getValue() <= 10) ||
+                    returnedCard.number.getValue() == 14); 
+        }
+        //switch turnes
+        isPlayer1Turn = !isPlayer1Turn;
+        if(isPlayer1Turn){
+            plr1Turn.setVisible(true);
+            plr2Turn.setVisible(false);
+        }else{
+            plr1Turn.setVisible(false);
+            plr2Turn.setVisible(true);
+        }
+        System.out.println("Discard pile has a " + zDiscard.group.get(0).number + " of " + zDiscard.group.get(0).suit + " on top.");
+        System.out.println("Draw pile has a " + zDraw.group.get(0).number + " of " + zDraw.group.get(0).suit + " on top.");
     }
-    
-    
-    
-    
     
     /**
      * back to main method
@@ -433,14 +547,11 @@ public class GarbageScreenController implements Initializable {
         zPlr1Hand = new Hand();
         zPlr2Hand = new Hand();
         isPlayer1Turn = true;
-        zPlr1FlagList = new boolean[10];
-        zPlr2FlagList = new boolean[10];
-        for(int i = 0; i < 10; i++){
+        zPlr1FlagList = new boolean[15];
+        zPlr2FlagList = new boolean[15];
+        for(int i = 0; i < 15; i++){
             zPlr1FlagList[i] = false;
             zPlr2FlagList[i] = false;
         }
-        
-        
     }    
-    
 }
