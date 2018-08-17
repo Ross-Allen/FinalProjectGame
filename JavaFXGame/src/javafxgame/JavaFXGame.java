@@ -18,6 +18,8 @@ import javafx.stage.Stage;
  */
 public class JavaFXGame extends Application {
     
+    public static boolean hasSplashLoadedOnce = false;
+    
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));

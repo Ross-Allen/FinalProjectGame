@@ -458,9 +458,24 @@ public class GarbageScreenController implements Initializable {
         if(plr1 == 10){
             WIN.setText("Player 1 wins!");
             WIN.setVisible(true);
+            plr1Turn.setVisible(false);
+            plr2Turn.setVisible(false);
+            discardPile.setDisable(true);
+            drawPile.setDisable(true);
+            btnShuffleAndPlay.setVisible(false);
+            plr1Turn.setVisible(false);
+            plr2Turn.setVisible(false);
+            
         }else if(plr2 == 10){
             WIN.setText("Player 2 wins!");
             WIN.setVisible(true);
+            plr1Turn.setVisible(false);
+            plr2Turn.setVisible(false);
+            discardPile.setDisable(true);
+            drawPile.setDisable(true);
+            btnShuffleAndPlay.setVisible(false);
+            plr1Turn.setVisible(false);
+            plr2Turn.setVisible(false);
         }
     }
     
