@@ -401,7 +401,6 @@ public class GarbageScreenController implements Initializable {
             zDraw = zDiscard;
             discardPile.setVisible(false);
         }
-        
          if(isPlayer1Turn){
             //remove card from top of discard pile
             Card returnedCard = zDraw.dealCard();
