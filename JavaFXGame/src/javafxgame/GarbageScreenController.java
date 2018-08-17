@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package javafxgame;
 
 import java.io.IOException;
@@ -25,20 +20,20 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
- *
+ * FXML Garbage Screen Controller class
  * @author ross
  */
 public class GarbageScreenController implements Initializable {
 
+    /**
+     * UI Controls
+     */
     @FXML
     Button btnInstruction;
     @FXML
     Button btnBack;
     @FXML
     Button btnShuffleAndPlay;
-    
-    //label card imageview for players
     @FXML
     ImageView plr1Pos1;
     @FXML
@@ -96,16 +91,47 @@ public class GarbageScreenController implements Initializable {
     @FXML
     Text WIN;
     
+    /**
+     * Deck
+     */
     private GroupOfCards zDeck;
+    /**
+     * Discard hand
+     */
     private GroupOfCards zDiscard;
+    /**
+     * Draw hand
+     */
     private GroupOfCards zDraw;
+    /**
+     * Player 1 hand
+     */
     private GroupOfCards zPlr1Hand;
+    /**
+     * Player 2 hand
+     */
     private GroupOfCards zPlr2Hand;
+    /**
+     * Turn tracker boolean
+     */
     private boolean isPlayer1Turn = true;
+    /**
+     * Stored return card
+     */
     private Card returnedCard;
+    /**
+     * Player 1 position tracker list of boolean
+     */
     private boolean[] zPlr1FlagList;
+    /**
+     * Player 2 position tracker list of boolean
+     */
     private boolean[] zPlr2FlagList;
    
+    /**
+     * Shuffle and Play button event
+     * @param event 
+     */
     @FXML
     private void handleShuffleAndPlay(ActionEvent event){
         plr1Turn.setVisible(true);
@@ -136,7 +162,6 @@ public class GarbageScreenController implements Initializable {
         deck.setVisible(false);
         btnShuffleAndPlay.setVisible(false);
         
-        
         //deck count before shuffle
         System.out.println("Deck has total of " + zDeck.group.size() + " cards.");
         //create deck and shuffle
@@ -151,8 +176,6 @@ public class GarbageScreenController implements Initializable {
                 zPlr2Hand.group.add(zDeck.group.remove(0));
             }
         }
-        System.out.println("Player 1's hand has " + zPlr1Hand.group.size() + " cards.");
-        System.out.println("Player 2's hand has " + zPlr2Hand.group.size() + " cards.");
         
         //draw top card of deck to discard.
         zDraw.group = zDeck.group;
@@ -161,6 +184,10 @@ public class GarbageScreenController implements Initializable {
         discardPile.setImage(discardImage);
     }// end shuffle and play method
     
+    /**
+     * Discard pile click event handler
+     * @param event 
+     */
     @FXML
     private void handleDiscardClick(MouseEvent event){
         discardPile.setVisible(true);
@@ -182,7 +209,6 @@ public class GarbageScreenController implements Initializable {
                 }
                 //call placeCard method
                 returnedCard = placeCard(returnedCard,zPlr1Hand);
-                
             }while((returnedCard.number.getValue() >= 1 &&
                     returnedCard.number.getValue() <= 10) ||
                     returnedCard.number.getValue() == 14); 
@@ -213,7 +239,6 @@ public class GarbageScreenController implements Initializable {
                 }
                 //call placeCard method
                 returnedCard = placeCard(returnedCard,zPlr2Hand);
-                
             }while((returnedCard.number.getValue() >= 1 &&
                     returnedCard.number.getValue() <= 10) ||
                     returnedCard.number.getValue() == 14); 
@@ -235,10 +260,14 @@ public class GarbageScreenController implements Initializable {
             plr1Turn.setVisible(false);
             plr2Turn.setVisible(true);
         }
-        System.out.println("Discard pile has a " + zDiscard.group.get(0).number + " of " + zDiscard.group.get(0).suit + " on top.");
-        System.out.println("Draw pile has a " + zDraw.group.get(0).number + " of " + zDraw.group.get(0).suit + " on top.");
     }//end discard click method
     
+    /**
+     * Place card to correct position helper method
+     * @param card
+     * @param plrHand
+     * @return 
+     */
     private Card placeCard(Card card, GroupOfCards plrHand){ 
         //temp return card
         Card returnCard = card;
@@ -361,6 +390,10 @@ public class GarbageScreenController implements Initializable {
         return returnCard;
     }
     
+    /**
+     * Draw pile click event handler
+     * @param event 
+     */
     @FXML
     private void handleDrawClick(MouseEvent event){
         if(zDraw.group.size() <= 0){
@@ -438,10 +471,11 @@ public class GarbageScreenController implements Initializable {
             plr1Turn.setVisible(false);
             plr2Turn.setVisible(true);
         }
-        System.out.println("Discard pile has a " + zDiscard.group.get(0).number + " of " + zDiscard.group.get(0).suit + " on top.");
-        System.out.println("Draw pile has a " + zDraw.group.get(0).number + " of " + zDraw.group.get(0).suit + " on top.");
     }
     
+    /**
+     * Check win helper method
+     */
     private void checkWin(){
         int plr1 = 0;
         int plr2 = 0;

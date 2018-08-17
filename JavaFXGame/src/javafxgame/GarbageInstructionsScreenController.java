@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package javafxgame;
 
 import java.io.IOException;
@@ -19,15 +14,19 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
- *
- * @author ross
+ * FXML Garbage Instructions Controller class
+  * @author ross
  */
 public class GarbageInstructionsScreenController implements Initializable {
     
     @FXML
     Button buttonBack;
     
+    /**
+     * Return to Garbage Screen Method
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void goBackToGarbageScreen(ActionEvent event) throws IOException{
         Parent screen2Parent = FXMLLoader.load(getClass().getResource("GarbageScreen.fxml"));

@@ -10,9 +10,6 @@ public class Card implements Comparable<Card>{// implements Comparable<Card>
     protected final Number number;
     protected final Suit suit;
     
-    //Rank enumeration
-    
-
     /**
      * Constructor method
      * @param number
@@ -56,7 +53,4 @@ public class Card implements Comparable<Card>{// implements Comparable<Card>
             return 0; //Card values are equal
         }
     }
-    
-   
-    
 }//end card class
