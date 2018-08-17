@@ -1,6 +1,6 @@
 package javafxgame;
 /**
- *
+ * Suit enumeration
  * @author ross
  */
 public enum Suit {

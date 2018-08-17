@@ -21,20 +21,46 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
- *
+ * FXML War Screen Controller class
  * @author ross
  */
 public class WarScreenController implements Initializable {
     
+    /**
+     * Deck
+     */
     private GroupOfCards zdeck;
+    /**
+     * Player 1 compare card hand
+     */
     private GroupOfCards zplr1Comparable;
+    /**
+     * Player 2 compare card hand
+     */
     private GroupOfCards zplr2Comparable;
+    /**
+     * Player 1 win hand
+     */
     private GroupOfCards zplr1WinHand;
+    /**
+     * Player 2 win hand
+     */
     private GroupOfCards zplr2WinHand;
+    /**
+     * Player 1 hand
+     */
     private GroupOfCards zplr1Hand;
+    /**
+     * Player 2 hand
+     */
     private GroupOfCards zplr2Hand;
+    /**
+     * Player 1 win count
+     */
     private int plr1WinCount = 0;
+    /**
+     * Player 2 Win count
+     */
     private int plr2WinCount = 0;
 
     //card pile declarations
@@ -81,7 +107,10 @@ public class WarScreenController implements Initializable {
     @FXML
     Text winText;
    
-    
+    /**
+     * Handle play click button event
+     * @param event 
+     */
     @FXML
     private void handlePlayAction(ActionEvent event){
         //set play button, draw button, and deck visibility.
@@ -119,6 +148,11 @@ public class WarScreenController implements Initializable {
         plr2Hand.setVisible(true); 
     }//end play handler
     
+    /**
+     * handle draw and compare button click event
+     * @param event
+     * @throws InterruptedException 
+     */
     @FXML
     private void handleDrawCompareAction(ActionEvent event) throws InterruptedException{
         //check for winner
@@ -226,9 +260,13 @@ public class WarScreenController implements Initializable {
             }
         }
         
-      
     }//end draw and compare method
     
+    /**
+     * Handle back button action
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void handleBackAction(ActionEvent event) throws IOException{
         Parent screen2Parent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
@@ -238,6 +276,11 @@ public class WarScreenController implements Initializable {
         window.show();
     }
     
+    /**
+     * Handle instructions button action
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void handleInstructionsAction(ActionEvent event) throws IOException{
         Parent screen2Parent = FXMLLoader.load(getClass().getResource("WarInstructionsScreen.fxml"));
@@ -247,6 +290,9 @@ public class WarScreenController implements Initializable {
         window.show();
     }
     
+    /**
+     * Pile to hand helper method
+     */
     private void pileToHand(){
         System.out.println("Player 1's hand is at: " + zplr1Hand.group.size());
         System.out.println("Player 2's hand is at: " + zplr2Hand.group.size());
@@ -337,7 +383,6 @@ public class WarScreenController implements Initializable {
                         break;
                 }//end switch
             }
-        
     }//end war method
     
    
@@ -379,8 +424,5 @@ public class WarScreenController implements Initializable {
         btnDrawCompare.setVisible(false);
         btnPlay.setVisible(true);
         winText.setVisible(false);
-        
-        
     }    
-    
 }

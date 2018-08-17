@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package javafxgame;
 
 import java.io.IOException;
@@ -23,7 +18,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
- *
+ * Main Menu Screen Controller Class
  * @author ross
  */
 public class MainMenuController implements Initializable {
@@ -31,35 +26,49 @@ public class MainMenuController implements Initializable {
     @FXML
     AnchorPane root;
     
+    /**
+     * ties UI to created splash pane
+     */
     public static AnchorPane rootPane;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //Check to see if splash has already ran once
         if(!JavaFXGame.hasSplashLoadedOnce){
             loadSplash();
         }
+        //init
         rootPane = root;
     }  
     
+    /**
+     * Load splash screen method
+     * Special credit to you tube tutorial "Genuine Coder" where credit is due
+     */
     private void loadSplash(){
         try {
+            //set true so it doesn't loop
             JavaFXGame.hasSplashLoadedOnce = true;
+            //create new pane
             AnchorPane pane = FXMLLoader.load(getClass().getResource("Splash.fxml"));
+            //set pane 
             root.getChildren().setAll(pane);
+            //set transition values
             FadeTransition in = new FadeTransition(Duration.seconds(4), pane);
             in.setFromValue(0);
             in.setToValue(1);
             in.setCycleCount(1);
-            
+            //use constant fade out acting as timer
             FadeTransition out = new FadeTransition(Duration.seconds(4), pane);
             out.setFromValue(1);
             out.setToValue(1);
             out.setCycleCount(1);
-            
+            //start transition
             in.play();
             in.setOnFinished(e->{
                 out.play();
             });
+            //set root to main menu screen
             out.setOnFinished(e->{
                 try {
                     AnchorPane main = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
@@ -72,8 +81,6 @@ public class MainMenuController implements Initializable {
             Logger.getLogger(MainMenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
     
     /**
      * Go to War Screen
@@ -103,6 +110,10 @@ public class MainMenuController implements Initializable {
         window.show();
     }
     
+    /**
+     * exit handler
+     * @param event 
+     */
     @FXML
     private void exitHandler(ActionEvent event){
         System.exit(0);

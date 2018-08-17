@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package javafxgame;
 
 import java.io.IOException;
@@ -19,8 +14,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
- *
+ * FXML War Instructions Controller class
  * @author ross
  */
 public class WarInstructionsScreenController implements Initializable {
@@ -28,6 +22,11 @@ public class WarInstructionsScreenController implements Initializable {
     @FXML
     Button okButton;
     
+    /**
+     * Go to war screen handler
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void goBackToWarScreen(ActionEvent event) throws IOException{
         Parent screen2Parent = FXMLLoader.load(getClass().getResource("WarScreen.fxml"));
@@ -36,8 +35,6 @@ public class WarInstructionsScreenController implements Initializable {
         window.setScene(screen2Scene);
         window.show();
     }
-    
-    
     
     /**
      * Initializes the controller class.

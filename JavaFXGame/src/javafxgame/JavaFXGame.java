@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * CS3230 Final Project War and Game of my Choice
+ * Ross Allen
  */
 package javafxgame;
 
@@ -13,11 +12,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- *
+ * JavaFX class with start/main
  * @author ross
  */
 public class JavaFXGame extends Application {
     
+    /**
+     * boolean to track if splash has played already
+     */
     public static boolean hasSplashLoadedOnce = false;
     
     @Override

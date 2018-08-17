@@ -1,6 +1,6 @@
 package javafxgame;
 /**
- *
+ * Number enumeration
  * @author ross
  */
 public enum Number {

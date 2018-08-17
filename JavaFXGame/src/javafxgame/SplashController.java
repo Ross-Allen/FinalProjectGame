@@ -9,7 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 
 /**
- * FXML Controller class
+ * FXML Splash Screen Controller class
  * @author ross
  */
 public class SplashController implements Initializable {

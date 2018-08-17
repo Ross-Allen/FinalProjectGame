@@ -2,6 +2,7 @@ package javafxgame;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
 /**
  * GroupOfCards abstract SuperClass
  * @author ross
