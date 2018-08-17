@@ -1,8 +1,4 @@
-/*
- * Empty Stylesheet file.
- */
-
-
+/** War Instructions Screen Stylesheet */
 .root{
     -fx-background-image:url("images/mainMenu.jpg");
     -fx-background-size:cover;

@@ -1,7 +1,4 @@
-/*
- * Empty Stylesheet file.
- */
-
+/** Garbage Screen Stylesheet */
 .root{
     -fx-background-image:url("images/green.jpg");
     -fx-background-size:cover;
